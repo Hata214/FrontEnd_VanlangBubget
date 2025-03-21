@@ -1,0 +1,50 @@
+# Instructions
+
+During your interaction with the user, if you find anything reusable in this project (e.g. version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `Lessons` section in the `.cursorrules` file so you will not make the same mistake again. 
+
+You should also use the `.cursorrules` file as a Scratchpad to organize your thoughts. When you receive a new task, first review the Scratchpad content, clear old tasks if necessary, explain the new task, and plan your steps. Use todo markers like:
+[X] Task 1
+[ ] Task 2
+
+# Tools
+
+Note all the tools are in python. So in the case you need to do batch processing, you can always consult the python files and write your own script.
+
+## Screenshot Verification
+For visual testing and verification, use:
+```bash
+venv/bin/python tools/screenshot_utils.py URL [--output OUTPUT] [--width WIDTH] [--height HEIGHT]
+```
+
+## LLM
+For code assistance and reviews:
+```bash
+venv/bin/python ./tools/llm_api.py --prompt "Your question" --provider "anthropic"
+```
+
+The LLM API supports multiple providers:
+- OpenAI (default, model: gpt-4o)
+- Azure OpenAI (model: configured via AZURE_OPENAI_MODEL_DEPLOYMENT)
+- DeepSeek (model: deepseek-chat)
+- Anthropic (model: claude-3-sonnet-20240229)
+- Gemini (model: gemini-pro)
+
+# Lessons
+
+## User Specified Lessons
+- **VLB-001:**  The project VangLangBudget (VLB) is a personal finance management application.  Prioritize features that directly contribute to tracking income, expenses, and budgeting.
+- **VLB-002:**  Tailwind CSS is being used for styling.  Adhere to Tailwind's utility-first approach and avoid writing custom CSS unless absolutely necessary.  Ensure responsiveness across different screen sizes.
+- **VLB-003:**  Redux is being used for state management.  Follow Redux best practices for actions, reducers, and store configuration. Structure the Redux store in a way that reflects the different modules/features of the application (e.g., income, expenses, budgets).
+- **VLB-004:** Axios is used for API calls.  Implement error handling and loading states for all API requests. Define API endpoints and data structures clearly.
+- **VLB-005:** Consider user experience and ensure that data input is validated and provides clear feedback.
+- **VLB-006:** Loan management features should include interest calculation, payment scheduling, and status tracking.
+- **VLB-007:** Use Chart.js for data visualization with responsive and interactive charts.
+- **VLB-008:** Ensure proper TypeScript typing for all components and Redux state.
+- **VLB-009:** Implement proper loading states and error handling throughout the application.
+
+## Cursor learned
+- **CUR-001:** Cursor IDE supports Next.js, JavaScript, HTML, CSS, and Tailwind CSS syntax highlighting, autocompletion, and code formatting out of the box. Leverage these features for efficient development.
+- **CUR-002:** Use Cursor's code generation and refactoring capabilities to speed up development and maintain code quality.
+- **CUR-003:** Utilize Cursor's debugging tools to efficiently identify and fix bugs in the Next.js and Redux code.
+- **CUR-004:** Leverage Cursor's AI-powered features to assist with writing unit tests for Next.js components and Redux reducers.
+- **CUR-005:** Use Cursor's code search to quickly find and navigate to specific code elements within the project.
