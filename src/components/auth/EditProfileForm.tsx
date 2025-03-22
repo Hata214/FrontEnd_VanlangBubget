@@ -1,11 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import authService from '../../services/authService';
+import { RootState } from '../../redux/store';
+import { authService } from '../../services/authService';
 
 interface EditProfileInputs {
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     currentPassword?: string;
     newPassword?: string;
@@ -16,7 +17,8 @@ const EditProfileForm: React.FC = () => {
     const { user } = useSelector((state: RootState) => state.auth);
     const { register, handleSubmit, watch, formState: { errors } } = useForm<EditProfileInputs>({
         defaultValues: {
-            name: user?.name || '',
+            firstName: user?.firstName || '',
+            lastName: user?.lastName || '',
             email: user?.email || ''
         }
     });
@@ -34,21 +36,39 @@ const EditProfileForm: React.FC = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                    Họ và tên
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                    Họ
                 </label>
                 <input
-                    {...register("name", {
-                        required: "Họ và tên là bắt buộc",
+                    {...register("firstName", {
+                        required: "Họ là bắt buộc",
                         minLength: {
                             value: 2,
-                            message: "Họ và tên phải có ít nhất 2 ký tự"
+                            message: "Họ phải có ít nhất 2 ký tự"
                         }
                     })}
                     type="text"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
                 />
-                {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
+                {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName.message}</p>}
+            </div>
+
+            <div>
+                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                    Tên
+                </label>
+                <input
+                    {...register("lastName", {
+                        required: "Tên là bắt buộc",
+                        minLength: {
+                            value: 2,
+                            message: "Tên phải có ít nhất 2 ký tự"
+                        }
+                    })}
+                    type="text"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
+                />
+                {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName.message}</p>}
             </div>
 
             <div>
