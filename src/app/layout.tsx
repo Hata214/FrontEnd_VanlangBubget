@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     robots: 'index, follow',
     icons: [
         { rel: 'icon', url: '/favicon.ico', sizes: 'any' },
-        { rel: 'icon', url: '/favicon.svg', type: 'image/svg+xml' },
+        { rel: 'icon', url: '/logo-vlb.png', type: 'image/png' },
     ]
 }
 

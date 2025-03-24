@@ -80,7 +80,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
                     <div className="flex items-center justify-between h-16 px-4 bg-primary">
                         <div className="flex items-center">
                             <Image
-                                src="/images/logos/logo192.svg"
+                                src="/logo-vlb.png"
                                 alt="VangLang Budget Logo"
                                 width={32}
                                 height={32}
@@ -197,7 +197,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
                             </button>
                             <div className="flex items-center">
                                 <Image
-                                    src="/images/logos/logo192.svg"
+                                    src="/logo-vlb.png"
                                     alt="VangLang Budget Logo"
                                     width={24}
                                     height={24}

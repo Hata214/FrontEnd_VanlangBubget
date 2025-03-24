@@ -13,7 +13,7 @@ export default function HomePage() {
             <div className="max-w-md w-full space-y-8">
                 <div className="flex flex-col items-center justify-center">
                     <Image
-                        src="/images/logos/logo192.svg"
+                        src="/logo-vlb.png"
                         alt="VangLang Budget Logo"
                         width={80}
                         height={80}

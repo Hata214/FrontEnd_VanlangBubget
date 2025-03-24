@@ -52,18 +52,20 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
-                        <Link href="/" className="flex items-center">
-                            <Image
-                                src="/images/logos/logo192.svg"
-                                alt="VangLang Budget Logo"
-                                width={32}
-                                height={32}
-                                className="mr-2"
-                            />
-                            <span className="text-lg font-bold text-foreground hidden sm:inline-block">
-                                {t('app.name')}
-                            </span>
-                        </Link>
+                        <div className="flex items-center h-14">
+                            <Link href="/" className="flex items-center space-x-2">
+                                <Image
+                                    src="/logo-vlb.png"
+                                    alt="VangLang Budget Logo"
+                                    width={32}
+                                    height={32}
+                                    className="rounded-sm"
+                                />
+                                <span className="hidden font-bold md:inline-block">
+                                    {t('app.name')}
+                                </span>
+                            </Link>
+                        </div>
 
                         {/* Navigation */}
                         <nav className="hidden md:flex space-x-8">

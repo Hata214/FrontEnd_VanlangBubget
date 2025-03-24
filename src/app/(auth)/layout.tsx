@@ -17,7 +17,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="flex flex-col items-center">
                         <Image
-                            src="/images/logos/logo192.svg"
+                            src="/logo-vlb.png"
                             alt="VangLang Budget Logo"
                             width={64}
                             height={64}
