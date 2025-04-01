@@ -36,3 +36,9 @@ next-env.d.ts
 
 # temp files
 /temp 
+
+# project specific files to ignore
+.cursorrules
+.note
+Note
+project-progress.md 
