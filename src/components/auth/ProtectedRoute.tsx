@@ -1,7 +1,7 @@
-import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState } from '../../redux/store';
 
 interface ProtectedRouteProps {
     children: React.ReactNode;
@@ -9,10 +9,18 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     const { isAuthenticated, loading, user } = useSelector((state: RootState) => state.auth);
-    const location = useLocation();
+    const router = useRouter();
+    const pathname = usePathname();
 
     // Kiểm tra xem có phải tài khoản demo không
     const isDemoAccount = user?.email === "demo@example.com";
+
+    useEffect(() => {
+        // Nếu không đang loading và chưa xác thực và không phải tài khoản demo
+        if (!loading && !isAuthenticated && !isDemoAccount) {
+            router.push(`/login?returnUrl=${encodeURIComponent(pathname)}`);
+        }
+    }, [loading, isAuthenticated, isDemoAccount, router, pathname]);
 
     // Hiển thị loading state
     if (loading) {
@@ -23,13 +31,13 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
         );
     }
 
-    // Cho phép truy cập nếu đã xác thực hoặc là tài khoản demo
-    if (isAuthenticated || isDemoAccount) {
-        return <>{children}</>;
+    // Nếu đang kiểm tra xác thực, hiển thị null để tránh flash của nội dung
+    if (!isAuthenticated && !isDemoAccount) {
+        return null;
     }
 
-    // Chuyển hướng về trang login nếu chưa xác thực
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    // Cho phép truy cập nếu đã xác thực hoặc là tài khoản demo
+    return <>{children}</>;
 };
 
 export default ProtectedRoute; 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { registerStart, registerSuccess, registerFailure } from '../../features/auth/authSlice';
-import authService from '../../services/authService';
+import { setCredentials, setLoading, setError } from '../../redux/features/authSlice';
+import { authService } from '../../services/authService';
 
 interface RegisterFormInputs {
     name: string;
@@ -14,19 +14,21 @@ interface RegisterFormInputs {
 
 const RegisterForm: React.FC = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<RegisterFormInputs>();
-    const navigate = useNavigate();
+    const router = useRouter();
     const password = watch("password");
     const dispatch = useDispatch();
 
     const onSubmit = async (data: RegisterFormInputs) => {
         try {
-            dispatch(registerStart());
+            dispatch(setLoading(true));
             const { confirmPassword, ...registerData } = data;
             const response = await authService.register(registerData);
-            dispatch(registerSuccess(response.user));
-            navigate('/');
+            dispatch(setCredentials(response));
+            dispatch(setLoading(false));
+            router.push('/');
         } catch (error: any) {
-            dispatch(registerFailure(error.response?.data?.message || 'Đăng ký thất bại'));
+            dispatch(setError(error.response?.data?.message || 'Đăng ký thất bại'));
+            dispatch(setLoading(false));
         }
     };
 

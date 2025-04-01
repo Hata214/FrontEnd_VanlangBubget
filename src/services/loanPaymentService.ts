@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LoanPayment } from '../utils/types';
+import { LoanPayment } from '../types';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 

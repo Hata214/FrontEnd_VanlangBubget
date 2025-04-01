@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IncomeCategory } from '../utils/types';
+import { IncomeCategory } from '../types';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 

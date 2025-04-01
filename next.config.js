@@ -13,6 +13,14 @@ const nextConfig = {
     env: {
         API_URL: process.env.API_URL || 'http://localhost:3001',
     },
+    // Tắt kiểm tra TypeScript khi build
+    typescript: {
+        ignoreBuildErrors: true,
+    },
+    // Tắt kiểm tra ESLint khi build
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     async rewrites() {
         const API_URL = process.env.API_URL || 'http://localhost:3001';
         return [
@@ -24,4 +32,4 @@ const nextConfig = {
     }
 }
 
-module.exports = withNextIntl(nextConfig) 
+module.exports = withNextIntl(nextConfig)

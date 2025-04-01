@@ -17,6 +17,16 @@ export interface Income {
     updatedAt: string
 }
 
+export interface IncomeCategory {
+    id: string
+    name: string
+    icon?: string
+    color?: string
+    userId: string
+    createdAt: string
+    updatedAt: string
+}
+
 export interface Expense {
     id: string
     amount: number
@@ -29,6 +39,16 @@ export interface Expense {
         lng: number
         address: string
     }
+    createdAt: string
+    updatedAt: string
+}
+
+export interface ExpenseCategory {
+    id: string
+    name: string
+    icon?: string
+    color?: string
+    userId: string
     createdAt: string
     updatedAt: string
 }

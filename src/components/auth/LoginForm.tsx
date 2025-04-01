@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { loginStart, loginSuccess, loginFailure } from '../../features/auth/authSlice';
-import authService from '../../services/authService';
+import { setCredentials, setLoading, setError } from '../../redux/features/authSlice';
+import { authService } from '../../services/authService';
 
 interface LoginFormInputs {
     email: string;
@@ -12,24 +12,26 @@ interface LoginFormInputs {
 
 const LoginForm: React.FC = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<LoginFormInputs>();
-    const navigate = useNavigate();
+    const router = useRouter();
     const dispatch = useDispatch();
     const [loginError, setLoginError] = useState<string | null>(null);
 
     const onSubmit = async (data: LoginFormInputs) => {
         try {
             setLoginError(null);
-            dispatch(loginStart());
+            dispatch(setLoading(true));
             console.log('Attempting login with:', data.email); // Debug log
             const response = await authService.login(data);
             console.log('Login response:', response); // Debug log
-            dispatch(loginSuccess(response.user));
-            navigate('/dashboard');
+            dispatch(setCredentials(response));
+            dispatch(setLoading(false));
+            router.push('/dashboard');
         } catch (error: any) {
             console.error('Login error:', error);
             const errorMessage = error.response?.data?.message || 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.';
             setLoginError(errorMessage);
-            dispatch(loginFailure(errorMessage));
+            dispatch(setError(errorMessage));
+            dispatch(setLoading(false));
         }
     };
 
